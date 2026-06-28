@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Math Functions</title>
+</head>
+<body>
+
+<h2>Check the console for output</h2>
+
+<script>
+  // Addition
+  function add(a, b) {
+    let result = a + b;
+    console.log("Addition Result:", result);
+    return result;
+  }
+
+  // Subtraction
+  function subtract(a, b) {
+    let result = a - b;
+    console.log("Subtraction Result:", result);
+    return result;
+  }
+
+  // Multiplication
+  function multiply(a, b) {
+    let result = a * b;
+    console.log("Multiplication Result:", result);
+    return result;
+  }
+
+  // Division
+  function divide(a, b) {
+    if (b === 0) {
+      console.log("Error: Cannot divide by zero");
+      return null;
+    }
+    let result = a / b;
+    console.log("Division Result:", result);
+    return result;
+  }
+
+  // Greeting function
+  function greet(name) {
+    let message = "Hello " + name;
+    console.log(message);
+    return message;
+  }
+
+  // Example calls
+  add(10, 5);
+  subtract(10, 3);
+  multiply(4, 6);
+  divide(20, 4);
+
+  greet("Alice");
+</script>
+
+</body>
+</html>
