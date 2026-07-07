@@ -1,0 +1,121 @@
+/* Part I */
+
+article {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.style-me1 {
+    color: red;
+}
+
+#style-me2 {
+    color: blue;
+}
+
+.style-me1#style-me2 {
+    color: purple;
+}
+
+.my-descendants-are-styled p {
+    background: red;
+}
+
+.my-children-are-styled > p {
+    background: lightgreen;
+}
+
+/* Part II */
+
+.box {
+    background: lightblue;
+    margin: 20px;
+    padding: 20px;
+    width: 200px;
+    height: 200px !important;
+    border: 10px solid blue;
+    box-sizing: border-box;
+    overflow: auto;
+    outline: 10px solid red;
+    border-radius: 20px;
+    background-image: url("img1.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Part III */
+
+.position-absolute {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    background: yellow;
+}
+
+.position-relative {
+    position: relative;
+    background: lightgray;
+}
+
+.position-sticky {
+    position: sticky;
+    top: 10px;
+    background: orange;
+}
+
+/* Part IV */
+
+.text-style {
+    color: navy;
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 700;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    letter-spacing: 2px;
+    word-spacing: 6px;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+
+/* Part V */
+
+a,
+a:link {
+    color: blue;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: purple;
+    font-style: italic;
+}
+
+/* Part VI */
+
+.calc-style {
+    background: lightcoral;
+    width: calc(100vw - 100px);
+}
+
+.fixed-width-col {
+    width: 350px;
+    display: inline-block;
+}
+
+.fluid-col {
+    width: calc(100% - 350px);
+    display: inline-block;
+}

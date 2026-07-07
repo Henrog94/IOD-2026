@@ -1,0 +1,308 @@
+/* ==========================
+   General Styles
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#f5f5f5;
+    color:#333;
+    line-height:1.6;
+}
+
+/* ==========================
+   Header
+========================== */
+
+header{
+    background:#2c3e50;
+    color:white;
+    padding:40px;
+}
+
+.header-content{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+}
+
+.header-content img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:cover;
+    border:5px solid white;
+}
+
+.header-content h1{
+    font-size:42px;
+}
+
+.header-content p{
+    font-size:20px;
+}
+
+/* ==========================
+   Navigation
+========================== */
+
+nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+    background:#34495e;
+    padding:15px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#f1c40f;
+}
+
+/* ==========================
+   Main
+========================== */
+
+main{
+    width:90%;
+    max-width:1000px;
+    margin:40px auto;
+}
+
+/* ==========================
+   Cards
+========================== */
+
+.card{
+    background:white;
+    margin-bottom:30px;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+.card h2{
+    margin-bottom:20px;
+    color:#2c3e50;
+}
+
+/* ==========================
+   Flexbox
+========================== */
+
+.flex-row{
+    display:flex;
+    justify-content:space-between;
+    gap:25px;
+    flex-wrap:wrap;
+}
+
+.box{
+    flex:1;
+    min-width:250px;
+    background:#ecf0f1;
+    padding:20px;
+    border-radius:10px;
+}
+
+/* ==========================
+   Skills
+========================== */
+
+.skills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.skills span{
+    background:#3498db;
+    color:white;
+    padding:10px 20px;
+    border-radius:20px;
+}
+
+/* ==========================
+   Job
+========================== */
+
+.job{
+    padding:15px;
+    border-left:5px solid #3498db;
+}
+
+/* ==========================
+   Links
+========================== */
+
+a{
+    color:#2980b9;
+}
+
+a:hover{
+    color:#e74c3c;
+}
+
+/* ==========================
+   Footer
+========================== */
+
+footer{
+    background:#2c3e50;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:30px;
+}
+
+/* ===========================================
+   TABLET (768px and below)
+=========================================== */
+
+@media screen and (max-width:768px){
+
+    header{
+        padding:30px;
+    }
+
+    .header-content{
+        flex-direction:column;
+        text-align:center;
+        gap:20px;
+    }
+
+    .header-content img{
+        width:140px;
+        height:140px;
+    }
+
+    .header-content h1{
+        font-size:32px;
+    }
+
+    .header-content p{
+        font-size:18px;
+    }
+
+    nav{
+        flex-direction:column;
+        gap:10px;
+        padding:20px;
+    }
+
+    nav a{
+        width:100%;
+        text-align:center;
+        padding:10px;
+    }
+
+    main{
+        width:95%;
+        margin:25px auto;
+    }
+
+    .flex-row{
+        flex-direction:column;
+    }
+
+    .box{
+        width:100%;
+        min-width:0;
+    }
+
+    .skills{
+        justify-content:center;
+    }
+
+    .card{
+        padding:20px;
+    }
+
+    .job{
+        border-left:none;
+        border-top:5px solid #3498db;
+    }
+}
+
+/* ===========================================
+   MOBILE (480px and below)
+=========================================== */
+
+@media screen and (max-width:480px){
+
+    body{
+        font-size:15px;
+    }
+
+    header{
+        padding:20px;
+    }
+
+    .header-content img{
+        width:110px;
+        height:110px;
+    }
+
+    .header-content h1{
+        font-size:26px;
+    }
+
+    .header-content p{
+        font-size:16px;
+    }
+
+    nav{
+        gap:8px;
+    }
+
+    nav a{
+        font-size:16px;
+        padding:8px;
+    }
+
+    main{
+        width:98%;
+        margin:15px auto;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .card h2{
+        font-size:22px;
+    }
+
+    .box{
+        padding:15px;
+    }
+
+    .skills{
+        gap:10px;
+        justify-content:center;
+    }
+
+    .skills span{
+        font-size:14px;
+        padding:8px 15px;
+    }
+
+    footer{
+        font-size:14px;
+        padding:15px;
+    }
+}
