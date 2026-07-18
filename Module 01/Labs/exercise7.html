@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lab 7</title>
+</head>
+<body>
+
+<h2>Open the Console (F12) to View Test Results</h2>
+
+<script>
+  function add(a, b) {
+    let result = a + b;
+    console.log("Addition Result:", result);
+    return result;
+  }
+
+  function subtract(a, b) {
+    let result = a - b;
+    console.log("Subtraction Result:", result);
+    return result;
+  }
+
+  function multiply(a, b) {
+    let result = a * b;
+    console.log("Multiplication Result:", result);
+    return result;
+  }
+
+  function divide(a, b) {
+    if (b === 0) {
+      console.log("Error: Cannot divide by zero");
+      return null;
+    }
+
+    let result = a / b;
+    console.log("Division Result:", result);
+    return result;
+  }
+
+  function greet(name) {
+    let message = "Hello " + name;
+    console.log(message);
+    return message;
+  }
+
+  console.log(add(10, 5) === 15);
+  console.log(add(2, 3) === 5);
+  console.log(add(-5, 5) === 0);
+
+  console.log(subtract(10, 3) === 7);
+  console.log(subtract(5, 5) === 0);
+  console.log(subtract(2, 8) === -6);
+
+  console.log(multiply(4, 6) === 24);
+  console.log(multiply(5, 0) === 0);
+  console.log(multiply(-3, 4) === -12);
+
+  console.log(divide(20, 4) === 5);
+  console.log(divide(9, 3) === 3);
+  console.log(divide(10, 0) === null);
+
+  console.log(greet("Alice") === "Hello Alice");
+</script>
+
+</body>
+</html>
