@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab 8 - Luxon Dates</title>
+
+
+    <!-- Import Luxon -->
+
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script>
+
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .question {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .answer {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>Lab 8 - Luxon Dates</h1>
+
+
+        <div class="question">
+
+            <h2>Question 1</h2>
+
+            <p>
+                Number of days between my birthdate and today:
+            </p>
+
+            <p
+                id="question1"
+                class="answer">
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <h2>Question 2</h2>
+
+            <p>
+                Years, months, and days between my birthdate and today:
+            </p>
+
+            <p
+                id="question2"
+                class="answer">
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <h2>Question 3</h2>
+
+            <p>
+                Date closest to the current date:
+            </p>
+
+            <p
+                id="question3"
+                class="answer">
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <h2>Question 4</h2>
+
+            <p>
+                Compare the two dates:
+            </p>
+
+            <p
+                id="question4"
+                class="answer">
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <h2>Question 5</h2>
+
+            <p>
+                Current time in London:
+            </p>
+
+            <p
+                id="question5"
+                class="answer">
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    
+
+        const DateTime = luxon.DateTime;
+
+
+       
+
+        const currentDate = DateTime.now();
+
+
+        // ==========================================
+        // QUESTION 1
+        // ==========================================
+
+
+        const birthDate =
+            DateTime.fromISO("1994-11-02");
+
+
+        
+
+        const daysBetween =
+            currentDate
+                .diff(birthDate, "days")
+                .days;
+
+
+        document.getElementById("question1").textContent =
+            Math.floor(daysBetween) + " days";
+
+
+        // ==========================================
+        // QUESTION 2
+        // ==========================================
+
+        
+
+        const age =
+            currentDate.diff(
+                birthDate,
+                ["years", "months", "days"]
+            ).toObject();
+
+
+        document.getElementById("question2").textContent =
+            Math.floor(age.years) +
+            " years, " +
+
+            Math.floor(age.months) +
+            " months, and " +
+
+            Math.floor(age.days) +
+            " days";
+
+
+        // ==========================================
+        // QUESTION 3
+        // ==========================================
+
+        
+
+        const date1 =
+            DateTime.fromISO("2025-01-01");
+
+
+        const date2 =
+            DateTime.fromISO("2027-01-01");
+
+
+      
+
+        const distance1 =
+            Math.abs(
+                currentDate
+                    .diff(date1, "days")
+                    .days
+            );
+
+
+        const distance2 =
+            Math.abs(
+                currentDate
+                    .diff(date2, "days")
+                    .days
+            );
+
+
+
+        if (distance1 < distance2) {
+
+            document.getElementById("question3").textContent =
+                date1.toFormat("MMMM dd, yyyy");
+
+        } else {
+
+            document.getElementById("question3").textContent =
+                date2.toFormat("MMMM dd, yyyy");
+
+        }
+
+
+        // ==========================================
+        // QUESTION 4
+        // ==========================================
+
+        const firstDate =
+            DateTime.fromISO("2024-06-15");
+
+
+        const secondDate =
+            DateTime.fromISO("2025-06-15");
+
+
+        if (firstDate < secondDate) {
+
+            document.getElementById("question4").textContent =
+                "The first date is before the second date.";
+
+        } else if (firstDate > secondDate) {
+
+            document.getElementById("question4").textContent =
+                "The first date is after the second date.";
+
+        } else {
+
+            document.getElementById("question4").textContent =
+                "The two dates are the same.";
+
+        }
+
+
+        // ==========================================
+        // QUESTION 5
+        // ==========================================
+
+        
+
+        const londonTime =
+            currentDate
+                .setZone("Europe/London");
+
+
+        document.getElementById("question5").textContent =
+            londonTime.toFormat(
+                "MMMM dd, yyyy - hh:mm:ss a"
+            );
+
+    </script>
+
+</body>
+
+</html>

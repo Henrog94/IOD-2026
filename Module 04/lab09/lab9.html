@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fake Store Categories</title>
+
+    <!-- ECharts Library -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+</head>
+
+<body>
+
+    <!-- Prepare a DOM with a defined width and height for ECharts -->
+    <div id="main" style="width: 900px; height: 600px;"></div>
+
+    <script type="text/javascript">
+
+        // Initialize the ECharts instance
+        let myChart = echarts.init(document.getElementById('main'));
+
+        // Starting chart configuration
+        let options = {
+            title: {
+                text: 'Fake Store Categories'
+            },
+
+            xAxis: {
+                type: 'category',
+                data: []
+            },
+
+            yAxis: {
+                type: 'value'
+            },
+
+            series: [{
+                name: '# products',
+                type: 'bar',
+                data: []
+            }]
+        };
+
+        // Get the products from the Fake Store API
+        fetch('https://fakestoreapi.com/products')
+
+            .then((response) => response.json())
+
+            .then((json) => {
+
+                console.log(json);
+
+                // Object that will store the number of products
+                // in each category
+                let categoryCounts = {};
+
+                // Go through every product
+                json.forEach((product) => {
+
+                    let category = product.category;
+
+                    // If the category doesn't exist yet,
+                    // create it and start the count at 0
+                    if (!categoryCounts[category]) {
+                        categoryCounts[category] = 0;
+                    }
+
+                    // Add 1 to the category count
+                    categoryCounts[category]++;
+                });
+
+                console.log(categoryCounts);
+
+                // Get the category names
+                let categories = Object.keys(categoryCounts);
+
+                // Get the number of products in each category
+                let counts = Object.values(categoryCounts);
+
+                // Put the categories into the X axis
+                options.xAxis.data = categories;
+
+                // Put the product counts into the bar chart
+                options.series[0].data = counts;
+
+                // Display the chart
+                myChart.setOption(options);
+            })
+
+            .catch((error) => {
+                console.error('Error getting data:', error);
+            });
+
+    </script>
+
+</body>
+</html>

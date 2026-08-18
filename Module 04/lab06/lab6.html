@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab 6 - Fetch Data</title>
+
+
+    <!-- Bootstrap CSS -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+
+
+<body>
+
+    <div class="container mt-4">
+
+        <h1 class="text-center mb-4">
+            JSONPlaceholder Posts
+        </h1>
+
+
+        <!-- Number of Posts -->
+
+        <div class="row mb-4">
+
+            <div class="col-md-4 mx-auto">
+
+                <label
+                    for="post-limit"
+                    class="form-label">
+
+                    Number of Posts
+
+                </label>
+
+
+                <select
+                    id="post-limit"
+                    class="form-select">
+
+                    <option value="10" selected>
+                        10
+                    </option>
+
+                    <option value="20">
+                        20
+                    </option>
+
+                    <option value="30">
+                        30
+                    </option>
+
+                    <option value="40">
+                        40
+                    </option>
+
+                    <option value="50">
+                        50
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <!-- Loading Message -->
+
+        <div
+            id="loading"
+            class="text-center">
+
+            Loading posts...
+
+        </div>
+
+
+        <!-- Posts -->
+
+        <div
+            id="post-container"
+            class="row g-4">
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JavaScript -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+
+    <script>
+
+        /*
+         * JSONPlaceholder API
+         */
+
+        const API_URL =
+            "https://jsonplaceholder.typicode.com/posts";
+
+
+        /*
+         * Get HTML elements
+         */
+
+        const postContainer =
+            document.getElementById("post-container");
+
+
+        const loading =
+            document.getElementById("loading");
+
+
+        const postLimit =
+            document.getElementById("post-limit");
+
+
+        /*
+         * Fetch posts
+         */
+
+        function fetchPosts() {
+
+            const limit =
+                postLimit.value;
+
+
+            loading.style.display = "block";
+
+
+            postContainer.innerHTML = "";
+
+
+            fetch(API_URL + "?_limit=" + limit)
+
+                .then(function(response) {
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Unable to fetch posts"
+                        );
+
+                    }
+
+                    return response.json();
+
+                })
+
+                .then(function(posts) {
+
+                    displayPosts(posts);
+
+                })
+
+                .catch(function(error) {
+
+                    postContainer.innerHTML = `
+
+                        <div class="col-12">
+
+                            <div class="alert alert-danger">
+
+                                Error loading posts:
+                                ${error.message}
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+                })
+
+                .finally(function() {
+
+                    loading.style.display = "none";
+
+                });
+
+        }
+
+
+        /*
+         * Display posts
+         */
+
+        function displayPosts(posts) {
+
+            posts.forEach(function(post) {
+
+
+                /*
+                 * Create Bootstrap card
+                 */
+
+                const column =
+                    document.createElement("div");
+
+
+                column.className =
+                    "col-12 col-md-6 col-lg-4";
+
+
+                column.innerHTML = `
+
+                    <div class="card h-100">
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+
+                                ${post.title}
+
+                            </h5>
+
+
+                            <p class="card-text">
+
+                                ${post.body}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+
+                postContainer.appendChild(column);
+
+            });
+
+        }
+
+
+        /*
+         * Change number of posts
+         */
+
+        postLimit.addEventListener(
+            "change",
+            function() {
+
+                fetchPosts();
+
+            }
+        );
+
+
+        /*
+         * Load 10 posts when
+         * the page first opens
+         */
+
+        fetchPosts();
+
+    </script>
+
+</body>
+
+</html>

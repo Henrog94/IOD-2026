@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab 3 Exercise 1</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e3f2fd;
+            padding: 30px;
+        }
+
+        .card {
+            width: 300px;
+            background-color: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lab 3 - Exercise 1</h1>
+
+    <!-- Card Template -->
+
+    <template id="card-template">
+
+        <div class="card">
+
+            <div class="card-title"></div>
+
+            <div class="card-text"></div>
+
+        </div>
+
+    </template>
+
+
+    <!-- Cards will appear here -->
+
+    <div id="card-list"></div>
+
+
+    <script>
+
+        function addCard(title, description) {
+
+            const template =
+                document.getElementById("card-template");
+
+            const card =
+                template.content.cloneNode(true);
+
+            card.querySelector(".card-title").innerText =
+                title;
+
+            card.querySelector(".card-text").innerText =
+                description;
+
+            document
+                .getElementById("card-list")
+                .appendChild(card);
+        }
+
+
+        addCard(
+            "My First Card",
+            "This is my first dynamically created card."
+        );
+
+    </script>
+
+</body>
+
+</html>

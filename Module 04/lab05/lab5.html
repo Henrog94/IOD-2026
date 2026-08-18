@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lab 5 - Manage Data</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        input,
+        textarea,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .news-item {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .news-item h2 {
+            margin-top: 0;
+        }
+
+        #stop-button {
+            background-color: #a83232;
+            margin-bottom: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>News Manager</h1>
+
+
+        <!-- Add News Form -->
+
+        <form id="news-form">
+
+            <h2>Add News</h2>
+
+            <input
+                type="text"
+                id="news-title"
+                placeholder="Enter news title"
+                required
+            >
+
+            <textarea
+                id="news-content"
+                placeholder="Enter news content"
+                required
+            ></textarea>
+
+            <button type="submit">
+                Add News
+            </button>
+
+        </form>
+
+
+        <!-- Stop Auto Refresh Button -->
+
+        <button id="stop-button">
+            Stop Auto Refresh
+        </button>
+
+
+        <!-- News Articles -->
+
+        <div id="news-container"></div>
+
+    </div>
+
+
+    <script>
+
+        /*
+         * News data
+         */
+
+        let news = [
+
+            {
+                id: 1,
+                title: "Election Results",
+                content: "Newly elected minister..."
+            },
+
+            {
+                id: 2,
+                title: "Sporting Success",
+                content: "World Cup winners..."
+            },
+
+            {
+                id: 3,
+                title: "Tornado Warning",
+                content: "Residents should prepare..."
+            }
+
+        ];
+
+
+        /*
+         * Get the news container
+         */
+
+        const newsContainer =
+            document.getElementById("news-container");
+
+
+        /*
+         * Display the news
+         */
+
+        function displayNews() {
+
+            // Clear the existing news
+
+            newsContainer.innerHTML = "";
+
+
+            // Loop through the news array
+
+            news.forEach(function(article) {
+
+                const newsElement =
+                    document.createElement("div");
+
+
+                newsElement.className =
+                    "news-item";
+
+
+                newsElement.innerHTML = `
+
+                    <h2>
+                        ${article.title}
+                    </h2>
+
+                    <p>
+                        ${article.content}
+                    </p>
+
+                `;
+
+
+                newsContainer.appendChild(
+                    newsElement
+                );
+
+            });
+
+        }
+
+
+        /*
+         * Display the news when the page loads
+         */
+
+        displayNews();
+
+
+        /*
+         * Refresh the news every 5 seconds
+         */
+
+        let refreshInterval =
+            setInterval(function() {
+
+                displayNews();
+
+            }, 5000);
+
+
+        /*
+         * Add new news
+         */
+
+        document
+            .getElementById("news-form")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    const title =
+                        document
+                            .getElementById("news-title")
+                            .value;
+
+
+                    const content =
+                        document
+                            .getElementById("news-content")
+                            .value;
+
+
+                    /*
+                     * Create a new news object
+                     */
+
+                    const newNews = {
+
+                        id: news.length + 1,
+
+                        title: title,
+
+                        content: content
+
+                    };
+
+
+                    /*
+                     * Add the new article
+                     * to the news array
+                     */
+
+                    news.push(newNews);
+
+
+                    /*
+                     * Clear the form
+                     */
+
+                    document
+                        .getElementById("news-title")
+                        .value = "";
+
+
+                    document
+                        .getElementById("news-content")
+                        .value = "";
+
+
+                    /*
+                     * Display the new article
+                     * immediately
+                     */
+
+                    displayNews();
+
+                }
+            );
+
+
+        /*
+         * Stop the automatic refresh
+         */
+
+        document
+            .getElementById("stop-button")
+            .addEventListener(
+                "click",
+                function() {
+
+                    clearInterval(
+                        refreshInterval
+                    );
+
+                    this.innerText =
+                        "Auto Refresh Stopped";
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>
