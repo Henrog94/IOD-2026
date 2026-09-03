@@ -1,0 +1,12 @@
+{
+  "name": "module5-exercise1",
+  "version": "1.0.0",
+  "main": "server1.js",
+  "scripts": {
+    "start": "node server1.js",
+    "start2": "node server2.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server-Side Calculator</title>
+    <link rel="stylesheet" href="css/calculator.css">
+</head>
+<body>
+    <main class="calculator">
+        <h1>Server-Side Calculator</h1>
+
+        <label for="num1">Number 1</label>
+        <input id="num1" type="number" step="any">
+
+        <label for="num2">Number 2</label>
+        <input id="num2" type="number" step="any">
+
+        <label for="operation">Operation</label>
+        <select id="operation">
+            <option value="add">Add</option>
+            <option value="subtract">Subtract</option>
+            <option value="multiply">Multiply</option>
+            <option value="divide">Divide</option>
+        </select>
+
+        <button id="calculateButton">Calculate</button>
+        <p id="result">Result: --</p>
+    </main>
+    <script src="js/calculator.js"></script>
+</body>
+</html>
