@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+#root {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.app {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+}
+
+.componentBox {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0;
+}
+
+button {
+  padding: 10px 16px;
+  margin: 5px;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #333;
+  color: white;
+}
+
+button:hover {
+  opacity: .85;
+}
+
+input, select {
+  padding: 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  margin: 5px;
+}
+
+.catGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.catCard {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  text-align: center;
+}
+
+.catCard img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+form div {
+  margin: 10px 0;
+}
+
+form label {
+  display: inline-block;
+  min-width: 100%;
+}
