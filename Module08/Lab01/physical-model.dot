@@ -1,0 +1,64 @@
+
+digraph MongoDBPhysicalModel {
+  graph [
+    rankdir=LR,
+    bgcolor="white",
+    nodesep=0.8,
+    ranksep=1.2
+  ];
+
+  node [
+    shape=record,
+    style=filled,
+    fillcolor="#EDF4FF",
+    color="#6688BB",
+    fontname="Arial",
+    fontsize=12
+  ];
+
+  edge [
+    color="#6688BB",
+    fontname="Arial",
+    fontsize=10
+  ];
+
+  users [
+    label="{USERS|
+      _id : ObjectId (PK)\l
+      username : String\l
+      email : String\l
+      joinedAt : Date\l}"
+  ];
+
+  posts [
+    label="{POSTS|
+      _id : ObjectId (PK)\l
+      userId : ObjectId (Ref USERS)\l
+      title : String\l
+      description : String\l
+      image : String\l
+      createdAt : Date\l}"
+  ];
+
+  likes [
+    label="{LIKES|
+      _id : ObjectId (PK)\l
+      userId : ObjectId (Ref USERS)\l
+      postId : ObjectId (Ref POSTS)\l}"
+  ];
+
+  comments [
+    label="{COMMENTS|
+      _id : ObjectId (PK)\l
+      userId : ObjectId (Ref USERS)\l
+      postId : ObjectId (Ref POSTS)\l
+      text : String\l
+      createdAt : Date\l}"
+  ];
+
+  users -> posts [label="1 to many"];
+  users -> likes [label="1 to many"];
+  users -> comments [label="1 to many"];
+  posts -> likes [label="1 to many"];
+  posts -> comments [label="1 to many"];
+}
