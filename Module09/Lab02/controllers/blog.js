@@ -1,0 +1,18 @@
+const {User,Post,Comment,Like}=require('../models');
+const create=(M,data)=>M.create(data), all=(M,where={})=>M.find(where), get=(M,id)=>M.findById(id), update=(M,id,data)=>M.findByIdAndUpdate(id,data,{new:true,runValidators:true}), remove=(M,id)=>M.findByIdAndDelete(id);
+const findLike=(user,post)=>Like.findOne({user,post});
+const fail=(message,status=400)=>{throw Object.assign(new Error(message),{status});};
+const required=(body,fields)=>{for(const k of fields)if(typeof body[k]!=='string'||!body[k].trim())fail(k+' is required');};
+const exists=async(M,id)=>{if(!id)fail('Missing related ID');const row=await get(M,id);if(!row)fail('Related record not found',404);return row;};
+exports.users=async(req,res)=>res.json(await all(User));
+exports.createUser=async(req,res)=>{required(req.body,['username','email']);if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(req.body.email))fail('Invalid email');res.status(201).json(await create(User,{username:req.body.username,email:req.body.email}));};
+exports.posts=async(req,res)=>res.json(await all(Post,req.query.user?{user:req.query.user}:{}));
+exports.post=async(req,res)=>res.json(await exists(Post,req.params.id));
+exports.createPost=async(req,res)=>{required(req.body,['title','description']);await exists(User,req.body.user);res.status(201).json(await create(Post,{user:req.body.user,title:req.body.title,description:req.body.description,image:req.body.image||''}));};
+exports.updatePost=async(req,res)=>{const data={};for(const k of ['title','description','image'])if(req.body[k]!==undefined){if(typeof req.body[k]!=='string'||(k!=='image'&&!req.body[k].trim()))fail('Invalid '+k);data[k]=req.body[k];}const row=await update(Post,req.params.id,data);if(!row)fail('Post not found',404);res.json(row);};
+exports.deletePost=async(req,res)=>{await exists(Post,req.params.id);for(const M of [Comment,Like])for(const row of await all(M,{post:req.params.id}))await remove(M,row.id);await remove(Post,req.params.id);res.sendStatus(204);};
+exports.comments=async(req,res)=>{await exists(Post,req.params.id);res.json(await all(Comment,{post:req.params.id}));};
+exports.comment=async(req,res)=>{required(req.body,['text']);await exists(Post,req.params.id);await exists(User,req.body.user);res.status(201).json(await create(Comment,{post:req.params.id,user:req.body.user,text:req.body.text}));};
+exports.likes=async(req,res)=>{await exists(Post,req.params.id);res.json(await all(Like,{post:req.params.id}));};
+exports.like=async(req,res)=>{const post=await exists(Post,req.params.id);await exists(User,req.body.user);if(String(post.user)===String(req.body.user))fail('Like another user’s post');if(await findLike(req.body.user,req.params.id))fail('Already liked',409);res.status(201).json(await create(Like,{post:req.params.id,user:req.body.user}));};
+exports.unlike=async(req,res)=>{const row=await findLike(req.params.userId,req.params.id);if(!row)fail('Like not found',404);await remove(Like,row.id);res.sendStatus(204);};

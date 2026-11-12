@@ -1,0 +1,2 @@
+const operations = { add:(a,b)=>a+b, subtract:(a,b)=>a-b, multiply:(a,b)=>a*b, divide:(a,b)=>{if(b===0) throw new Error('Cannot divide by zero');return a/b;} };
+exports.calculate=(operation,a,b)=>{if(!Object.hasOwn(operations,operation)) throw new Error('Unknown operation');if(!Number.isFinite(a)||!Number.isFinite(b)) throw new Error('Enter two finite numbers');const result=operations[operation](a,b);if(!Number.isFinite(result)) throw new Error('Result is outside the supported range');return result;};

@@ -1,0 +1,1 @@
+require('dotenv').config();require('./models').connect().then(()=>require('./app').listen(process.env.PORT||3000,()=>console.log('Blog API running'))).catch(e=>{console.error(e.message);process.exitCode=1;});

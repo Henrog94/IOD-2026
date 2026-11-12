@@ -1,0 +1,2 @@
+const r=require('express').Router(),c=require('../controllers/blog');
+r.get('/users',c.users);r.post('/users',c.createUser);r.get('/posts',c.posts);r.post('/posts',c.createPost);r.get('/posts/:id',c.post);r.put('/posts/:id',c.updatePost);r.delete('/posts/:id',c.deletePost);r.get('/posts/:id/comments',c.comments);r.post('/posts/:id/comments',c.comment);r.get('/posts/:id/likes',c.likes);r.post('/posts/:id/likes',c.like);r.delete('/posts/:id/likes/:userId',c.unlike);module.exports=r;
